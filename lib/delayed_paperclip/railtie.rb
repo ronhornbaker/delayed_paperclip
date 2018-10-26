@@ -19,7 +19,7 @@ module DelayedPaperclip
     # Glue includes DelayedPaperclip Class Methods and Instance Methods into ActiveRecord
     # Attachment and URL Generator extends Paperclip
     def self.insert
-      ActiveRecord::Base.send(:include, DelayedPaperclip::Glue)
+      # ActiveRecord::Base.send(:include, DelayedPaperclip::Glue)
       Paperclip::Attachment.prepend(DelayedPaperclip::Attachment)
       Paperclip::Attachment.default_options[:url_generator] = DelayedPaperclip::UrlGenerator
     end

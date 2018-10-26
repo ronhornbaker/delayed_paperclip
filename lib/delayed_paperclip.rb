@@ -95,8 +95,9 @@ module DelayedPaperclip
     def mark_enqueue_delayed_processing
       unless @_enqued_for_processing_with_processing.blank? # catches nil and empty arrays
         updates = @_enqued_for_processing_with_processing.collect{|n| "#{n}_processing = :true" }.join(", ")
-        updates = ActiveRecord::Base.send(:sanitize_sql_array, [updates, {:true => true}])
-        self.class.unscoped.where(:id => self.id).update_all(updates)
+        # updates = ActiveRecord::Base.send(:sanitize_sql_array, [updates, {:true => true}])
+        # self.class.unscoped.where(:id => self.id).update_all(updates)
+        self.class.find(self.id).update_attributes!(updates)
       end
     end
 
